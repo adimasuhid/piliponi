@@ -37,7 +37,9 @@ Returns local Telco coverage of a given number
 ##Needs
 
 Formatting Numbers
+<br>
 Accepting Integers
+<br>
 Thorough testing
 
 ## Contributing
