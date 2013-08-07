@@ -1,6 +1,6 @@
 # Piliponi
 
-TODO: Write a gem description
+Simple mobile phone formatter for the Philippines
 
 ## Installation
 
