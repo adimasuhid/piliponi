@@ -37,20 +37,37 @@ describe Piliponi do
   end
 
   context "#format" do
-    it "formats to 09XXXXXXXX"
-    it "formats to +639XXXXXXX"
-    it "formats to 9XXXXXXX"
+    ["0917-000-0000","+63917-000-0000","917-000-0000"].each do |number|
+      context "Given #{number}" do
+        it "formats to 09XXXXXXXX" do
+          Piliponi.formatted("#{number}","local").should eq("09170000000")
+        end
+        it "formats to +639XXXXXXX"
+        it "formats to 9XXXXXXX"
+        it "returns not plausible"
+      end
+    end
   end
 
   context "#telco?" do
-    it "returns smart for 09XX"
+    it "returns smart for 09XX" do
+      Piliponi.telco?("09210000000").should eq("smart")
+    end
     it "returns globe for 09XX" do
       Piliponi.telco?("09170000000").should eq("globe")
     end
   end
 
   context "#prefix" do
-    it "returns XXXX"
+    {
+      "0917" => "09170000001",
+      "0917" => "9170000001",
+      "0917" => "+639170000001"
+    }.each do |pre,number|
+      it "returns #{pre} given #{number}" do
+        Piliponi.prefix("#{number}").should eq("#{pre}")
+      end
+    end
   end
 
 end

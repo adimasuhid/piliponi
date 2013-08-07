@@ -17,9 +17,26 @@ module Piliponi
     end
   end
 
-  #def self.format number=nil, type="local"
+  def self.formatted number=nil, type="local"
+    if plausible? number
+      clean_num = clean(number)
 
-  #end
+      if type == "local"
+        if clean_num[0] == "9"
+          "0#{clean_num[0..9]}"
+        elsif clean_num[0..1] == "63"
+          "0#{clean_num[2..11]}"
+        elsif clean_num[0..1] == "09"
+          clean_num[0..11]
+        else
+          nil
+        end
+      end
+
+    else
+      "not plausible"
+    end
+  end
 
   def self.clean(number=nil)
     number.gsub(/\D/,'') if number
