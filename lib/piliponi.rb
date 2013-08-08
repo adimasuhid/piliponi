@@ -29,25 +29,17 @@ module Piliponi
   end
 
   def telco? number=nil
-    PiliponiApi.new.lookup prefix(number)
+    PiliponiApi.new.lookup prefix(clean number)
   end
 
   def prefix number=nil
-    clean_num = clean(number)
-
-    hash = { '0' => [0,3],
-             '6' => [2,4],
-             '9' => [0,2] }
-
-    start = hash[clean_num[0]].first
-    finish = hash[clean_num[0]].last
-
-    clean_prefix(clean_num[start..finish])
+    hash = { '0' => [0,3], '6' => [2,4], '9' => [0,2] }
+    start, finish = hash[number[0]].first, hash[number[0]].last
+    clean_prefix(number[start..finish])
   end
 
   def clean_prefix(number)
-    number = "0#{number}" if number[0] != '0'
-    number
+    number = "0#{number}" if number[0] != '0'; number
   end
 
   private
