@@ -34,6 +34,24 @@ Returns local Telco coverage of a given number
 
     Piliponi.telco "09170000001" #globe
 
+###Normalization
+Returns formatted numbers as specified
+
+####Local
+    Piliponi.normalize("0917-000-0000", format: :local) #09170000000
+
+####International
+    Piliponi.normalize("0917-000-0000", format: :international) #+639170000000
+
+####Pure
+    Piliponi.normalize("0917-000-0000", format: :pure) #9170000000
+
+####Erroneous Numbers
+    Piliponi.normalize("wat", format: :pure) #Piliponi::InvalidPhoneNumberException
+
+####Wrong format
+    Piliponi.normalize("0917-000-0000", format: :none) #Piliponi::FormatNotRecognizedException
+
 ##Needs
 
 Formatting Numbers
