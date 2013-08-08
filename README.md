@@ -27,7 +27,7 @@ Check if the number is a probable mobile number
 ###Clean
 Removes Non-numeric characters
 
-    Piliponi.clean "+639-000-0001" #6390000001
+    Piliponi.clean "+639-17-000-0001" #639170000001
 
 ###Telco
 Returns local Telco coverage of a given number
