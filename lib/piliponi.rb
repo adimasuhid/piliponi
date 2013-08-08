@@ -5,7 +5,7 @@ module Piliponi
   class FormatNotRecognizedException < Exception; end;
   class InvalidPhoneNumberException < Exception; end;
 
-  def plausible? number
+  def self.plausible? number
     clean_num = clean(number)
     size = clean_num.size
 
@@ -20,7 +20,7 @@ module Piliponi
     end
   end
 
-  def normalize number, format: :local
+  def self.normalize number, format: :local
     formats = %i(pure local international)
     raise FormatNotRecognizedException unless formats.include?(format)
 
@@ -28,15 +28,15 @@ module Piliponi
     raise InvalidPhoneNumberException
   end
 
-  def clean(number=nil)
+  def self.clean(number=nil)
     number.gsub(/\D/,'') if number
   end
 
-  def telco? number=nil
+  def self.telco? number=nil
     PiliponiApi.new.lookup prefix(number)
   end
 
-  def prefix number=nil
+  def self.prefix number=nil
     clean_num = clean(number)
 
     if clean_num[0] == "9"
@@ -52,15 +52,15 @@ module Piliponi
 
   private
 
-    def _nf_pure(number)
+    def self._nf_pure(number)
       number[-10..-1]
     end
 
-    def _nf_local(number)
+    def self._nf_local(number)
       '0' << _nf_pure(number)
     end
 
-    def _nf_international(number)
+    def self._nf_international(number)
       '+63' << _nf_pure(number)
     end
 end
