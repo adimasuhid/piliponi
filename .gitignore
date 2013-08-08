@@ -3,6 +3,7 @@
 .bundle
 .config
 .yardoc
+.rspec
 Gemfile.lock
 InstalledFiles
 _yardoc
@@ -20,3 +21,9 @@ tmp
 *.un~
 *.swp
 *.swo
+
+#rvm files
+.rvmrc
+.ruby-version
+
+

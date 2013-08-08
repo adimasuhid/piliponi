@@ -2,10 +2,10 @@ require "piliponi/version"
 require "piliponi/piliponi_api"
 
 module Piliponi
-  class FormatNotRecognizedException < Exception; end;
-  class InvalidPhoneNumberException < Exception; end;
+  class ::FormatNotRecognizedException < Exception; end;
+  class ::InvalidPhoneNumberException < Exception; end;
 
-  def self.plausible? number
+  def plausible? number
     clean_num = clean(number)
     size = clean_num.size
 
@@ -20,8 +20,10 @@ module Piliponi
     end
   end
 
-  def self.normalize number, format: :local
-    formats = %i(pure local international)
+  def normalize(number, options={})
+    formats = [:pure, :local, :international]
+    format = options[:format].intern
+
     raise FormatNotRecognizedException unless formats.include?(format)
 
     return send "_nf_#{format}", clean(number) if plausible?(number)
