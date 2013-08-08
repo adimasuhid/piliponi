@@ -1,5 +1,7 @@
 # Piliponi
 
+{<img src="https://travis-ci.org/adimasuhid/piliponi.png" />}[https://travis-ci.org/adimasuhid/piliponi]
+
 Simple mobile phone formatter for the Philippines
 
 ## Installation
