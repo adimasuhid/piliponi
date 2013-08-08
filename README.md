@@ -1,6 +1,6 @@
 # Piliponi
 
-{<img src="https://travis-ci.org/adimasuhid/piliponi.png" />}[https://travis-ci.org/adimasuhid/piliponi]
+[![Build Status](https://travis-ci.org/adimasuhid/piliponi.png?branch=master)](https://travis-ci.org/adimasuhid/piliponi)
 
 Simple mobile phone formatter for the Philippines
 
