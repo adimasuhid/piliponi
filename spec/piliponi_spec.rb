@@ -1,40 +1,44 @@
 require 'spec_helper'
 
-describe Piliponi do
+class Dummy
   include Piliponi
+end
+
+describe Piliponi do
+  let!(:dummy) { Dummy.new }
 
   context "#plausible?" do
     it "works" do
       lambda do
-        plausible?("whatevs")
+        dummy.plausible?("whatevs")
       end.should_not raise_error
     end
 
     it "returns true given 9170000001" do
-      plausible?("9170000001").should eq(true)
+      dummy.plausible?("9170000001").should eq(true)
     end
 
     it "returns true given 639170000001" do
-      plausible?("639170000001").should eq(true)
+      dummy.plausible?("639170000001").should eq(true)
     end
 
     it "returns true given +639170000001" do
-      plausible?("+639170000001").should eq(true)
+      dummy.plausible?("+639170000001").should eq(true)
     end
 
     it "returns false given a non-numerical string" do
-      plausible?("wawa").should eq(false)
+      dummy.plausible?("wawa").should eq(false)
     end
 
   end
 
   context "#clean" do
     it "removes characters" do
-      clean("+639170000001").should eq("639170000001")
+      dummy.clean("+639170000001").should eq("639170000001")
     end
 
     it "returns nil if no number is placed" do
-      clean.should be_nil
+      dummy.clean.should be_nil
     end
   end
 
@@ -42,21 +46,21 @@ describe Piliponi do
     let(:number) { '(0919) 363-2598' }
 
     it "formats to 09XXXXXXXX" do
-      normalize(number, {format: 'local'}).should eq('09193632598')
+      dummy.normalize(number, {format: 'local'}).should eq('09193632598')
     end
 
     it "formats to +639XXXXXXX" do
-      normalize(number, {format: 'international'}).should eq('+639193632598')
+      dummy.normalize(number, {format: 'international'}).should eq('+639193632598')
     end
 
     it "formats to 9XXXXXXX" do
-      normalize(number, {format: 'pure'}).should eq('9193632598')
+      dummy.normalize(number, {format: 'pure'}).should eq('9193632598')
     end
 
     context "when the format passed is not recognized" do
       it "raises FormatNotRecognizedException" do
         expect{
-          normalize(number, format: :foo)
+          dummy.normalize(number, format: :foo)
         }.to raise_error(FormatNotRecognizedException)
       end
     end
@@ -64,7 +68,7 @@ describe Piliponi do
     context "when the number is not valid" do
       it "raises InvalidPhoneNumberException" do
         expect{
-          normalize("notanumber", format: :local)
+          dummy.normalize("notanumber", format: :local)
         }.to raise_error(InvalidPhoneNumberException)
       end
     end
@@ -72,11 +76,31 @@ describe Piliponi do
 
   context "#telco?" do
     it "returns smart for 09XX" do
-      telco?('09201234567').should eq('smart')
+      dummy.telco?('09201234567').should eq('smart')
     end
 
     it "returns globe for 09XX" do
-      telco?("09170000000").should eq("globe")
+      dummy.telco?("09170000000").should eq("globe")
+    end
+  end
+
+  context '#prefix' do
+    describe '09171231234' do
+      it 'returns 0917' do
+        expect(dummy.prefix('09171231234')).to eq '0917'
+        expect(dummy.prefix('639171231234')).to eq '0917'
+        expect(dummy.prefix('9171231234')).to eq '0917'
+      end
+    end
+  end
+
+  context '#clean_prefix' do
+    describe '0917' do
+      it 'retunrs 0917' do
+        expect(dummy.prefix('0917')).to eq '0917'
+        expect(dummy.prefix('63917')).to eq '0917'
+        expect(dummy.prefix('917')).to eq '0917'
+      end
     end
   end
 

@@ -9,15 +9,9 @@ module Piliponi
     clean_num = clean(number)
     size = clean_num.size
 
-    if clean_num[0] == "9" && size == 10
-      true
-    elsif clean_num[0..1] == "63" && size == 12
-      true
-    elsif clean_num[0..1] == "09" && size == 11
-      true
-    else
-      false
-    end
+    (clean_num[0] == "9" && size == 10) ||
+    (clean_num[0..1] == "63" && size == 12) ||
+    (clean_num[0..1] == "09" && size == 11)
   end
 
   def normalize(number, options={})
@@ -30,39 +24,43 @@ module Piliponi
     raise InvalidPhoneNumberException
   end
 
-  def self.clean(number=nil)
-    number.gsub(/\D/,'') if number
+  def clean(number=nil)
+    number.tr('^0-9','') if number
   end
 
-  def self.telco? number=nil
+  def telco? number=nil
     PiliponiApi.new.lookup prefix(number)
   end
 
-  def self.prefix number=nil
+  def prefix number=nil
     clean_num = clean(number)
 
-    if clean_num[0] == "9"
-      "0#{clean_num[0..2]}"
-    elsif clean_num[0..1] == "63"
-      "0#{clean_num[2..4]}"
-    elsif clean_num[0..1] == "09"
-      clean_num[0..3]
-    else
-      nil
-    end
+    hash = { '0' => [0,3],
+             '6' => [2,4],
+             '9' => [0,2] }
+
+    start = hash[clean_num[0]].first
+    finish = hash[clean_num[0]].last
+
+    clean_prefix(clean_num[start..finish])
+  end
+
+  def clean_prefix(number)
+    number = "0#{number}" if number[0] != '0'
+    number
   end
 
   private
 
-    def self._nf_pure(number)
+    def _nf_pure(number)
       number[-10..-1]
     end
 
-    def self._nf_local(number)
+    def _nf_local(number)
       '0' << _nf_pure(number)
     end
 
-    def self._nf_international(number)
+    def _nf_international(number)
       '+63' << _nf_pure(number)
     end
 end
