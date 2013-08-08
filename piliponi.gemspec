@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = Piliponi::VERSION
   spec.authors       = ["Ace Dimasuhid"]
   spec.email         = ["ace.dimasuhid@gmail.com"]
-  spec.description   = %q{Pilipino Mobile Phone Formatter}
+  spec.description   = %q{Philippine Mobile Phone Formatter}
   spec.summary       = %q{Mobile Phone Number Formatter for the Philippines}
   spec.homepage      = ""
   spec.license       = "MIT"
