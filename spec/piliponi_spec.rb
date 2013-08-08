@@ -36,10 +36,36 @@ describe Piliponi do
     end
   end
 
-  context "#format" do
-    it "formats to 09XXXXXXXX"
-    it "formats to +639XXXXXXX"
-    it "formats to 9XXXXXXX"
+  context "#normalize" do
+    let(:number) { '(0919) 363-2598' }
+
+    before{ include Piliponi }
+
+    it "formats to 09XXXXXXXX" do
+      normalize(number, format: :local).should eq('09193632598')
+    end
+
+    it "formats to +639XXXXXXX" do
+      normalize(number, format: :international).should eq('+639193632598')
+    end
+
+    it "formats to 9XXXXXXX" do
+      normalize(number, format: :pure).should eq('9193632598')
+    end
+
+    context "when the format passed is not recognized" do
+      it "raises FormatNotRecognizedException" do
+        normalize(number, format: :foo).
+          should raise FormatNotRecognizedException
+      end
+    end
+
+    context "when the number is not valid" do
+      it "raises InvalidPhoneNumberException" do
+        normalize("notanumber", format: :local).
+          should raise InvalidPhoneNumberException
+      end
+    end
   end
 
   context "#telco?" do
