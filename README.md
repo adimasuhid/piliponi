@@ -75,3 +75,7 @@ Thorough testing
 4. Commit your changes (`git commit -am 'Add some feature'`)
 5. Push to the branch (`git push origin my-new-feature`)
 6. Create new Pull Request
+
+## License
+
+MIT
