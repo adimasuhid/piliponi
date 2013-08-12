@@ -76,4 +76,6 @@ Thorough testing
 
 ## License
 
-MIT
+Copyright (c) 2013 Ace Dimasuhid. See [LICENSE] for details.
+
+[LICENSE]: http://github.com/adimasuhid/piliponi/blob/master/LICENSE.txt
