@@ -1,6 +1,6 @@
 # Piliponi
 
-[![Build Status](https://travis-ci.org/adimasuhid/piliponi.png?branch=master)](https://travis-ci.org/adimasuhid/piliponi)
+[![Gem Version](https://badge.fury.io/rb/piliponi.png)](http://badge.fury.io/rb/piliponi) [![Build Status](https://travis-ci.org/adimasuhid/piliponi.png?branch=master)](https://travis-ci.org/adimasuhid/piliponi)
 
 Simple mobile phone formatter for the Philippines
 
@@ -78,4 +78,6 @@ Thorough testing
 
 ## License
 
-MIT
+Copyright (c) 2013 Ace Dimasuhid. See [LICENSE] for details.
+
+[LICENSE]: http://github.com/adimasuhid/piliponi/blob/master/LICENSE.txt

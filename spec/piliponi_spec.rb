@@ -76,11 +76,19 @@ describe Piliponi do
 
   context "#telco?" do
     it "returns smart for 09XX" do
-      dummy.telco?('09201234567').should eq('smart')
+      dummy.telco?('09181234567').should eq('smart')
     end
 
     it "returns globe for 09XX" do
       dummy.telco?("09170000000").should eq("globe")
+    end
+
+    it "returns sun for 09XX" do
+      dummy.telco?("09220000000").should eq("sun")
+    end
+
+    it "returns talk and text/ addict or red" do
+      dummy.telco?("09070000000").should eq("talk and text/ addict or red")
     end
   end
 
