@@ -88,7 +88,7 @@ describe Piliponi do
     end
 
     it "returns talk and text/ addict or red" do
-      dummy.telco?("09070000000").should eq("talk and text/ addict or red")
+      dummy.telco?("09070000000").should eq("smart_others")
     end
   end
 
