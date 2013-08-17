@@ -9,9 +9,10 @@ module Piliponi
     clean_num = clean(number)
     size = clean_num.size
 
-    (clean_num[0] == "9" && size == 10) ||
+    ((clean_num[0] == "9" && size == 10) ||
     (clean_num[0..1] == "63" && size == 12) ||
-    (clean_num[0..1] == "09" && size == 11)
+    (clean_num[0..1] == "09" && size == 11)) &&
+    telco?(clean_num) != "unknown"
   end
 
   def normalize(number, options={})
