@@ -6,6 +6,8 @@ module Piliponi
   class ::InvalidPhoneNumberException < Exception; end;
 
   def plausible? number
+    return false if number.nil?
+
     clean_num = clean(number)
     size = clean_num.size
 
