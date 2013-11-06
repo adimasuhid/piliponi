@@ -1,4 +1,4 @@
-module Piliponi
+module Core
   class PiliponiApi
     def lookup(prefix)
       smart = %w{0813 0918 0947 0998 0999}

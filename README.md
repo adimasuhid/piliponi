@@ -19,7 +19,7 @@ Or install it yourself as:
     $ gem install piliponi
 
 ## Usage
-Include piliponi to your class to use its methods
+Include piliponi to your class to use its methods or access it directly as singleton methods.
 
     class Dummy
       include Piliponi
@@ -27,38 +27,52 @@ Include piliponi to your class to use its methods
 
     dummy = Dummy.new
 
+
 ###Plausible
 Check if the number is a probable mobile number
 
-    dummy.plausible? "091700000001"   #true
-    dummy.plausible? "NotaNumber"   #false
+    Piliponi.plausible? "09170000001"   #true
+    dummy.plausible? "091700000001"     #true
+    dummy.plausible? "NotaNumber"       #false
 
 ###Clean
 Removes Non-numeric characters
 
-    dummy.clean "+639-17-000-0001" #639170000001
+    Piliponi.clean "+639-17-000-0001" #639170000001
+    dummy.clean "+639-17-000-0001"    #639170000001
 
 ###Telco
 Returns local Telco coverage of a given number
 
+    Piliponi.telco "09170000001" #globe
     dummy.telco "09170000001" #globe
 
 ###Normalization
 Returns formatted numbers as specified
 
 ####Local
+
+    Piliponi.normalize("0917-000-0000", format: :local) #09170000000
     dummy.normalize("0917-000-0000", format: :local) #09170000000
 
 ####International
+
+    Piliponi.normalize("0917-000-0000", format: :international) #+639170000000
     dummy.normalize("0917-000-0000", format: :international) #+639170000000
 
 ####Pure
+
+    Piliponi.normalize("0917-000-0000", format: :pure) #9170000000
     dummy.normalize("0917-000-0000", format: :pure) #9170000000
 
 ####Erroneous Numbers
+
+    Piliponi.normalize("wat", format: :pure) #Piliponi::InvalidPhoneNumberException
     dummy.normalize("wat", format: :pure) #Piliponi::InvalidPhoneNumberException
 
 ####Wrong format
+
+    Piliponi.normalize("0917-000-0000", format: :none) #Piliponi::FormatNotRecognizedException
     dummy.normalize("0917-000-0000", format: :none) #Piliponi::FormatNotRecognizedException
 
 ##Needs
