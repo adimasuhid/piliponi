@@ -78,8 +78,6 @@ Returns formatted numbers as specified
 ##Needs
 
 Accepting Integers
-<br>
-Thorough testing
 
 ## Contributing
 
