@@ -76,20 +76,28 @@ describe Piliponi do
 
   describe ".telco?" do
 
-    it "returns smart for 09XX" do
-      expect(Piliponi.telco? '09181234567').to eq('smart')
+    context "with valid prefixes"  do
+      it "returns smart for 09XX" do
+        expect(Piliponi.telco? '09181234567').to eq('smart')
+      end
+
+      it "returns globe for 09XX" do
+        expect(Piliponi.telco? "09170000000").to eq('globe')
+      end
+
+      it "returns sun for 09XX" do
+        expect(Piliponi.telco? "09220000000").to eq('sun')
+      end
+
+      it "returns exetel" do
+        expect(Piliponi.telco? "09730000000").to eq('exetel')
+      end
     end
 
-    it "returns globe for 09XX" do
-      expect(Piliponi.telco? "09170000000").to eq("globe")
-    end
-
-    it "returns sun for 09XX" do
-      expect(Piliponi.telco? "09220000000").to eq("sun")
-    end
-
-    it "returns talk and text/ addict or red" do
-      expect(Piliponi.telco? "09070000000").to eq("smart_others")
+    context "with unknown prefixes" do
+      it "returns unknown" do
+        expect(Piliponi.telco? "0890000000").to eq('unknown')
+      end
     end
 
   end
