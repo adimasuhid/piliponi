@@ -2,6 +2,8 @@ module Core
   class ::FormatNotRecognizedException < Exception; end;
   class ::InvalidPhoneNumberException < Exception; end;
 
+  #checks the number's validity
+  #return false if number is null
   def plausible? number
     return false if number.nil?
 
@@ -11,9 +13,11 @@ module Core
     ((clean_num[0] == "9" && size == 10) ||
     (clean_num[0..1] == "63" && size == 12) ||
     (clean_num[0..1] == "09" && size == 11)) &&
-    telco?(clean_num) != "unknown"  
+    telco?(clean_num) != "unknown"
   end
 
+  #normalize number
+  #three formats: pure, local and international
   def normalize(number, options={})
     formats = [:pure, :local, :international]
     format = options[:format].intern
@@ -24,10 +28,11 @@ module Core
     raise InvalidPhoneNumberException
   end
 
+  #cleans the number
   def clean(number=nil)
     number.tr('^0-9','') if number
   end
-
+  
   def telco? number=nil
     PiliponiApi.new.lookup prefix(clean number)
   end
