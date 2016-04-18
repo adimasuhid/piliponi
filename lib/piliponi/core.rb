@@ -32,7 +32,8 @@ module Core
   def clean(number=nil)
     number.tr('^0-9','') if number
   end
-  
+
+  #lookup of prefix to the number
   def telco? number=nil
     PiliponiApi.new.lookup prefix(clean number)
   end
