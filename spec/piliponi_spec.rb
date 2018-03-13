@@ -89,8 +89,8 @@ describe Piliponi do
         expect(Piliponi.telco? "09220000000").to eq('sun')
       end
 
-      it "returns exetel" do
-        expect(Piliponi.telco? "09730000000").to eq('exetel')
+      it "returns extel" do
+        expect(Piliponi.telco? "09730000000").to eq('extel')
       end
     end
 
